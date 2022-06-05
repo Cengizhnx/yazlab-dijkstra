@@ -174,7 +174,7 @@ namespace yazLab
             {
                 shortestPathLeftNumber = points.Count();
                 shortestPathRightNumber = 0;
-                shortestWeightToSecondPoint = distances[points.Count() - 1, 0];
+                shortestWeightToSecondPoint = distances[findPathNameToIndex(startPointName), 0];
             }
             else{
                 foreach (var point in points)
@@ -314,9 +314,23 @@ namespace yazLab
 
             visited = new Dictionary<string, string>();
 
-            DrawDijkstraGraph();
             CreateVisitedPointsArray();
             double shortestWeight = findShortestNextMove(points.First().Key);
+
+            totalDistanceLabel.Text = shortestWeight.ToString();
+            string shortestPattern = "";
+
+            foreach (var visitedPlace in visited)
+            {
+                shortestPattern += visitedPlace.Key + "->" ;
+            }
+            shortestPattern += points.First().Key;
+            shortestPatternLabel.Text = shortestPattern;
+            double t = shortestWeight / 40;
+            double time = 60 * t / 100;
+
+            estimatedArrivalLabel.Text = time.ToString() + "dk";
+
         }
     }
 }
