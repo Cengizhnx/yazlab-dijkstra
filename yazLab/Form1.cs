@@ -317,7 +317,7 @@ namespace yazLab
             CreateVisitedPointsArray();
             double shortestWeight = findShortestNextMove(points.First().Key);
 
-            totalDistanceLabel.Text = shortestWeight.ToString();
+            totalDistanceLabel.Text = "Toplam " + Math.Round(shortestWeight, 2).ToString() + "km";
             string shortestPattern = "";
 
             foreach (var visitedPlace in visited)
@@ -326,11 +326,6 @@ namespace yazLab
             }
             shortestPattern += points.First().Key;
             shortestPatternLabel.Text = shortestPattern;
-            double t = shortestWeight / 40;
-            double time = 60 * t / 100;
-
-            estimatedArrivalLabel.Text = time.ToString() + "dk";
-
         }
     }
 }

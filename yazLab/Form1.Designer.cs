@@ -42,7 +42,6 @@ namespace yazLab
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.shortestPatternLabel = new System.Windows.Forms.Label();
-            this.estimatedArrivalLabel = new System.Windows.Forms.Label();
             this.totalDistanceLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -82,7 +81,7 @@ namespace yazLab
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(194, 20);
-            this.textBox2.TabIndex = 1;
+            this.textBox2.TabIndex = 2;
             // 
             // label2
             // 
@@ -101,7 +100,7 @@ namespace yazLab
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(194, 20);
-            this.textBox3.TabIndex = 1;
+            this.textBox3.TabIndex = 3;
             // 
             // label3
             // 
@@ -123,7 +122,7 @@ namespace yazLab
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(458, 210);
-            this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.TabIndex = 99;
             // 
             // button1
             // 
@@ -144,7 +143,7 @@ namespace yazLab
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(59, 24);
-            this.button2.TabIndex = 4;
+            this.button2.TabIndex = 5;
             this.button2.Text = "Sil";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -159,7 +158,7 @@ namespace yazLab
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.Size = new System.Drawing.Size(458, 308);
-            this.dataGridView2.TabIndex = 6;
+            this.dataGridView2.TabIndex = 100;
             // 
             // button3
             // 
@@ -167,9 +166,9 @@ namespace yazLab
             this.button3.Location = new System.Drawing.Point(916, 659);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 71);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "En kısa yol";
+            this.button3.Size = new System.Drawing.Size(458, 71);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "En kısa yolu hesapla";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -177,32 +176,22 @@ namespace yazLab
             // 
             this.shortestPatternLabel.AutoSize = true;
             this.shortestPatternLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.shortestPatternLabel.Location = new System.Drawing.Point(918, 759);
+            this.shortestPatternLabel.Location = new System.Drawing.Point(913, 751);
             this.shortestPatternLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.shortestPatternLabel.MaximumSize = new System.Drawing.Size(458, 71);
             this.shortestPatternLabel.Name = "shortestPatternLabel";
             this.shortestPatternLabel.Size = new System.Drawing.Size(51, 17);
             this.shortestPatternLabel.TabIndex = 8;
             this.shortestPatternLabel.Text = "Enlem:";
             // 
-            // estimatedArrivalLabel
-            // 
-            this.estimatedArrivalLabel.AutoSize = true;
-            this.estimatedArrivalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.estimatedArrivalLabel.Location = new System.Drawing.Point(1075, 659);
-            this.estimatedArrivalLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.estimatedArrivalLabel.Name = "estimatedArrivalLabel";
-            this.estimatedArrivalLabel.Size = new System.Drawing.Size(51, 17);
-            this.estimatedArrivalLabel.TabIndex = 9;
-            this.estimatedArrivalLabel.Text = "Enlem:";
-            // 
             // totalDistanceLabel
             // 
             this.totalDistanceLabel.AutoSize = true;
-            this.totalDistanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.totalDistanceLabel.Location = new System.Drawing.Point(1075, 713);
+            this.totalDistanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.totalDistanceLabel.Location = new System.Drawing.Point(912, 792);
             this.totalDistanceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.totalDistanceLabel.Name = "totalDistanceLabel";
-            this.totalDistanceLabel.Size = new System.Drawing.Size(51, 17);
+            this.totalDistanceLabel.Size = new System.Drawing.Size(58, 20);
             this.totalDistanceLabel.TabIndex = 10;
             this.totalDistanceLabel.Text = "Enlem:";
             // 
@@ -212,7 +201,6 @@ namespace yazLab
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1426, 857);
             this.Controls.Add(this.totalDistanceLabel);
-            this.Controls.Add(this.estimatedArrivalLabel);
             this.Controls.Add(this.shortestPatternLabel);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView2);
@@ -253,7 +241,6 @@ namespace yazLab
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label shortestPatternLabel;
-        private System.Windows.Forms.Label estimatedArrivalLabel;
         private System.Windows.Forms.Label totalDistanceLabel;
     }
 }
