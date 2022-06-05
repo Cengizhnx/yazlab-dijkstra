@@ -20,6 +20,11 @@ namespace yazLab
         const double PI = Math.PI;
 
         Dictionary<string, string> points = new Dictionary<string, string>();
+        Dictionary<string, string> visited = new Dictionary<string, string>();
+        double[,] distances = new double[0, 0];
+
+        double[] visitedPoints = new double[0];
+        double[] lastVisitiedPoint = new double[2];
 
         public Form1()
         {
@@ -65,7 +70,10 @@ namespace yazLab
 
         private void CalcMeasurePoints()
         {
-            double[,] distances = new double[points.Count(), points.Count()];
+            distances = new double[points.Count(), points.Count()];
+
+            CreateVisitedPointsArray();
+
             int row = 0, col = 0;
 
             foreach (var firstPoint in points)
@@ -87,8 +95,6 @@ namespace yazLab
 
                 foreach (var secondPoint in points)
                 {
-                    
-
                     if (firstPoint.Key != secondPoint.Key)
                     {
                         double secondPointLongLeft = Double.Parse(secondPoint.Value.Split('-')[0].Split('.')[0]);
@@ -104,13 +110,134 @@ namespace yazLab
                         distances[row, col] = distance;
                         dgwRow[col + 1] = distance;
                     }
-                    else dgwRow[col + 1] = '-';
+                    else dgwRow[col + 1] = 0.0;
 
                     col++;
                 }
                 tablo2.Rows.Add(dgwRow);
                 row++;
             }
+        }
+
+        private void CreateVisitedPointsArray()
+        {
+            visitedPoints = new double[points.Count()];
+            for (int i = 0; i < points.Count(); i++)
+            {
+                visitedPoints[i] = 0;
+            }
+        }
+
+        private void DrawDijkstraGraph()
+        {
+            
+        }
+
+        private void findShortestPath()
+        {
+            int counter = 0;
+
+
+            foreach (var firstPoint in points)
+            {
+                double weight = 0;
+                for (int i = 0; i < distances.Length; i++)
+                {
+                    if (counter == i)
+                    {
+
+                        double leastWeight = 9999999; 
+
+                        for (int j = 0; j < distances.Length; j++)
+                        {
+                            if (distances[i, j] < leastWeight && visitedPoints[j] == 0)
+                            {
+                                visitedPoints[j] = 1;
+                                double shortestWeightToSecondPoint = distances[i, j];
+                            }
+                        }
+                    }
+                }
+
+                counter = counter + 1;
+            }
+        }
+
+        private double findShortestNextMove(string startPointName)
+        {
+            int indexNumber = 0, shortestPathLeftNumber = 0, shortestPathRightNumber = 0;
+            double shortestWeightToSecondPoint = 9999999, leastWeight;
+
+            visitedPoints[findPathNameToIndex(startPointName)] = 1;
+
+            if (isAllPointsVisited())
+            {
+                shortestPathLeftNumber = points.Count();
+                shortestPathRightNumber = 0;
+                shortestWeightToSecondPoint = distances[points.Count() - 1, 0];
+            }
+            else{
+                foreach (var point in points)
+                {
+                    if (startPointName == point.Key)
+                    {   
+                        leastWeight = 9999999;
+
+                        for (int j = 0; j < points.Count(); j++)
+                        {
+                            if (distances[indexNumber, j] < shortestWeightToSecondPoint && visitedPoints[j] == 0 && distances[indexNumber, j] != 0)
+                            {
+                                shortestPathLeftNumber = indexNumber;
+                                shortestPathRightNumber = j;
+                                shortestWeightToSecondPoint = distances[indexNumber, j];
+                            }
+                        }
+                    }
+                    indexNumber++;
+                }
+            }
+
+            visited.Add(startPointName, shortestWeightToSecondPoint.ToString());
+
+            if (!isAllPointsVisited()) shortestWeightToSecondPoint += findShortestNextMove(findRightNumberToPathName(shortestPathRightNumber));
+            return shortestWeightToSecondPoint;
+        }
+
+        private string findRightNumberToPathName(int indexNumber)
+        {
+            int counter = 0;
+            foreach (var point in points)
+            {
+                if (counter == indexNumber)
+                {
+                    return point.Key;
+                }
+
+                counter++;
+            }
+            return "-1";
+        }
+
+        private int findPathNameToIndex(string pathName)
+        {
+            int counter = 0;
+            foreach (var point in points)
+            {
+                if (pathName == point.Key) return counter;
+
+                counter++;
+            }
+            return -1;
+        }
+
+        private bool isAllPointsVisited()
+        {
+            for (int i = 0; i < points.Count(); i++)
+            {
+                if (visitedPoints[i] == 0) return false;
+            }
+
+            return true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -185,6 +312,11 @@ namespace yazLab
         private void button3_Click(object sender, EventArgs e)
         {
 
+            visited = new Dictionary<string, string>();
+
+            DrawDijkstraGraph();
+            CreateVisitedPointsArray();
+            double shortestWeight = findShortestNextMove(points.First().Key);
         }
     }
 }
